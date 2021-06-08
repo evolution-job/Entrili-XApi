@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="xapi.activity.serializer" class="Entrili\XApiBundle\Serializer\ActivitySerializerInterface"
+                 public="false">
+            <factory service="xapi.serializer.factory" method="createActivitySerializer"/>
+        </service>
+
+        <service id="xapi.actor.serializer" class="Entrili\XApiBundle\Serializer\ActorSerializerInterface" public="false">
+            <factory service="xapi.serializer.factory" method="createActorSerializer"/>
+        </service>
+
+        <service id="xapi.document_data.serializer" class="Entrili\XApiBundle\Serializer\DocumentDataSerializerInterface"
+                 public="false">
+            <factory service="xapi.serializer.factory" method="createDocumentDataSerializer"/>
+        </service>
+
+        <service id="xapi.serializer.factory" class="Entrili\XApiBundle\Serializer\SerializerFactory"
+                 public="false">
+            <argument type="service" id="xapi.serializer"/>
+        </service>
+
+        <service id="xapi.serializer" class="Symfony\Component\Serializer\SerializerInterface" public="false">
+            <factory class="Entrili\XApiBundle\Serializer\Serializer" method="createSerializer"/>
+        </service>
+
+        <service id="xapi.state.serializer" class="Entrili\XApiBundle\Serializer\StateSerializerInterface"
+                 public="false">
+            <factory service="xapi.serializer.factory" method="createStateSerializer"/>
+        </service>
+
+        <service id="xapi.statement.serializer" class="Entrili\XApiBundle\Serializer\StatementSerializerInterface"
+                 public="false">
+            <factory service="xapi.serializer.factory" method="createStatementSerializer"/>
+        </service>
+
+        <service id="xapi.statement_result.serializer"
+                 class="Entrili\XApiBundle\Serializer\StatementResultSerializerInterface" public="false">
+            <factory service="xapi.serializer.factory" method="createStatementResultSerializer"/>
+        </service>
+
+    </services>
+</container>

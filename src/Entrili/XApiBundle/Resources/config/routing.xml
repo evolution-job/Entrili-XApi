@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://symfony.com/schema/routing"
+        xsi:schemaLocation="http://symfony.com/schema/routing
+        http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="xapi.activities.options" path="/activities" methods="OPTIONS">
+        <default key="_controller">xapi.controller.statement.options:optionsStatement</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+
+    <route id="xapi.activity.get" path="/activities" methods="GET,PUT,POST">
+        <default key="_controller">xapi.controller.activity.get:getActivity</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+
+    <route id="xapi.state.options" path="/activities/state" methods="OPTIONS">
+        <default key="_controller">xapi.controller.statement.options:optionsStatement</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+
+    <route id="xapi.state.put" path="/activities/state" methods="PUT,POST">
+        <default key="_controller">xapi.controller.state.put:putState</default>
+        <default key="xapi_serializer">state</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+
+    <route id="xapi.state.get" path="/activities/state" methods="GET">
+        <default key="_controller">xapi.controller.state.get:getState</default>
+        <default key="xapi_serializer">state</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+
+    <route id="xapi.statement.options" path="/statements" methods="OPTIONS">
+        <default key="_controller">xapi.controller.statement.options:optionsStatement</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+    <route id="xapi.statement.get" path="/statements" methods="GET">
+        <default key="_controller">xapi.controller.statement.get:getStatement</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+    <route id="xapi.statement.put" path="/statements" methods="PUT">
+        <default key="_controller">xapi.controller.statement.put:putStatement</default>
+        <default key="xapi_serializer">statement</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+    <route id="xapi.statement.post" path="/statements" methods="POST">
+        <default key="_controller">xapi.controller.statement.post:postStatement</default>
+        <default key="xapi_serializer">statement</default>
+        <default key="xapi.route">
+            <bool>true</bool>
+        </default>
+    </route>
+
+</routes>

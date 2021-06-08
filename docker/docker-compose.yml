@@ -1,0 +1,40 @@
+version: "3.3"
+services:
+
+  db:
+    image: mysql:latest
+    container_name: xapi_db
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3307:3306"
+    restart: always
+    volumes:
+      - xapi-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=xapi
+      - MYSQL_ALLOW_EMPTY_PASSWORD
+    networks:
+      - entrili_xapi
+
+  www:
+    build: php
+    container_name: xapi_www
+    ports:
+      - "8741:80"
+    volumes:
+      - ./php/vhosts:/etc/apache2/sites-enabled
+      - ./../:/var/www/xapi
+      - xapi-cache:/var/www/xapi/var/cache:delegated
+      - xapi-composer:/home/www/.composer/cache
+    restart: always
+    networks:
+      - entrili_xapi
+
+networks:
+  entrili_xapi:
+
+volumes:
+  xapi-cache:
+  xapi-composer:
+  xapi-db:

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="xapi.doctrine.state_class_metadata" class="Doctrine\ORM\Mapping\ClassMetadata"
+                 public="false">
+            <argument>Entrili\XApiBundle\Repository\Mapping\State</argument>
+            <factory service="xapi.doctrine.object_manager" method="getClassMetadata"/>
+        </service>
+        <service id="xapi.repository.state"
+                 class="Entrili\XApiBundle\Repository\StateRepository" public="false">
+            <argument type="service" id="xapi.doctrine.object_manager"/>
+            <argument type="service" id="xapi.doctrine.state_class_metadata"/>
+        </service>
+
+        <service id="xapi.doctrine.statement_class_metadata" class="Doctrine\ORM\Mapping\ClassMetadata"
+                 public="false">
+            <argument>Entrili\XApiBundle\Repository\Mapping\Statement</argument>
+            <factory service="xapi.doctrine.object_manager" method="getClassMetadata"/>
+        </service>
+        <service id="xapi.repository.statement"
+                 class="Entrili\XApiBundle\Repository\StatementRepository" public="false">
+            <argument type="service" id="xapi.doctrine.object_manager"/>
+            <argument type="service" id="xapi.doctrine.statement_class_metadata"/>
+        </service>
+
+        <service id="xapi.doctrine.activity_class_metadata" class="Doctrine\ORM\Mapping\ClassMetadata"
+                 public="false">
+            <argument>Entrili\XApiBundle\Repository\Mapping\StatementObject</argument>
+            <factory service="xapi.doctrine.object_manager" method="getClassMetadata"/>
+        </service>
+        <service id="xapi.repository.activity" class="Entrili\XApiBundle\Repository\ActivityRepository" public="false">
+            <argument type="service" id="xapi.doctrine.object_manager"/>
+            <argument type="service" id="xapi.doctrine.activity_class_metadata"/>
+        </service>
+    </services>
+</container>

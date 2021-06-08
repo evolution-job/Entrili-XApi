@@ -1,0 +1,4 @@
+# XApi Bundle
+xapi_bundle:
+  resource: "../../src/Entrili/XApiBundle/Resources/config/routing.xml"
+  prefix: /lrs

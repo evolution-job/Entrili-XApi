@@ -1,0 +1,96 @@
+<?php
+
+/*
+ * This file is part of the xAPI package.
+ *
+ * (c) Christian Flothmann <christian.flothmann@xabbuh.de>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Entrili\XApiBundle\Model\Interaction;
+
+use Entrili\XApiBundle\Model\Definition;
+use Entrili\XApiBundle\Model\Extensions;
+use Entrili\XApiBundle\Model\IRI;
+use Entrili\XApiBundle\Model\IRL;
+use Entrili\XApiBundle\Model\LanguageMap;
+
+/**
+ * An interaction which asks the learner to select from a discrete set of
+ * choices on a scale.
+ *
+ * @author Christian Flothmann <christian.flothmann@xabbuh.de>
+ */
+final class LikertInteractionDefinition extends InteractionDefinition
+{
+    private $scale;
+
+    /**
+     * @param LanguageMap|null $name
+     * @param LanguageMap|null $description
+     * @param IRI|null $type
+     * @param IRL|null $moreInfo
+     * @param Extensions|null $extensions
+     * @param string[]|null $correctResponsesPattern
+     * @param InteractionComponent[]|null $scale
+     */
+    public function __construct(LanguageMap $name = null, LanguageMap $description = null, IRI $type = null, IRL $moreInfo = null, Extensions $extensions = null, array $correctResponsesPattern = null, array $scale = null)
+    {
+        parent::__construct($name, $description, $type, $moreInfo, $extensions, $correctResponsesPattern);
+
+        $this->scale = $scale;
+    }
+
+    /**
+     * @param InteractionComponent[]|null $scale
+     *
+     * @return static
+     */
+    public function withScale(array $scale = null)
+    {
+        $interaction = clone $this;
+        $interaction->scale = $scale;
+
+        return $interaction;
+    }
+
+    public function getScale()
+    {
+        return $this->scale;
+    }
+
+    public function equals(Definition $definition)
+    {
+        if (!parent::equals($definition)) {
+            return false;
+        }
+
+        if (!$definition instanceof LikertInteractionDefinition) {
+            return false;
+        }
+
+        if (null !== $this->scale xor null !== $definition->scale) {
+            return false;
+        }
+
+        if (null !== $this->scale) {
+            if (count($this->scale) !== count($definition->scale)) {
+                return false;
+            }
+
+            foreach ($this->scale as $key => $scale) {
+                if (!isset($definition->scale[$key])) {
+                    return false;
+                }
+
+                if (!$scale->equals($definition->scale[$key])) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="xapi.controller.activity.get" class="Entrili\XApiBundle\Controller\ActivityGetController" public="true">
+            <argument type="service" id="xapi.repository.activity" />
+            <argument type="service" id="xapi.activity.serializer" />
+        </service>
+
+        <service id="xapi.controller.state.get" class="Entrili\XApiBundle\Controller\StateGetController" public="true">
+            <argument type="service" id="xapi.repository.state"/>
+            <argument type="service" id="xapi.state.serializer"/>
+        </service>
+
+        <service id="xapi.controller.state.put" class="Entrili\XApiBundle\Controller\StatePutController" public="true">
+            <argument type="service" id="xapi.repository.state"/>
+        </service>
+
+        <service id="xapi.controller.statement.options" class="Entrili\XApiBundle\Controller\StatementOptionsController"
+                 public="true">
+        </service>
+
+        <service id="xapi.controller.statement.get" class="Entrili\XApiBundle\Controller\StatementGetController"
+                 public="true">
+            <argument type="service" id="xapi.repository.statement"/>
+            <argument type="service" id="xapi.statement.serializer"/>
+            <argument type="service" id="xapi.statement_result.serializer"/>
+            <argument type="service" id="xapi.factory.statements_filter"/>
+        </service>
+
+        <service id="xapi.controller.statement.post" class="Entrili\XApiBundle\Controller\StatementPostController"
+                 public="true">
+            <argument type="service" id="xapi.repository.statement"/>
+        </service>
+
+        <service id="xapi.controller.statement.put" class="Entrili\XApiBundle\Controller\StatementPutController"
+                 public="true">
+            <argument type="service" id="xapi.repository.statement"/>
+        </service>
+
+    </services>
+
+</container>

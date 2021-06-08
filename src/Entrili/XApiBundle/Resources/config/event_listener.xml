@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="xapi.event_listener.alternate_request_syntax"
+                 class="Entrili\XApiBundle\EventListener\AlternateRequestSyntaxListener">
+            <tag name="kernel.event_listener" event="kernel.request"/>
+        </service>
+
+        <service id="xapi.event_listener.exception" class="Entrili\XApiBundle\EventListener\ExceptionListener">
+        </service>
+
+        <service id="xapi.event_listener.serializer" class="Entrili\XApiBundle\EventListener\SerializerListener">
+            <argument type="service" id="xapi.statement.serializer"/>
+            <argument type="service" id="xapi.state.serializer"/>
+            <tag name="kernel.event_listener" event="kernel.request"/>
+        </service>
+
+        <service id="xapi.event_listener.version" class="Entrili\XApiBundle\EventListener\VersionListener">
+            <tag name="kernel.event_listener" event="kernel.request"/>
+            <tag name="kernel.event_listener" event="kernel.response"/>
+        </service>
+    </services>
+</container>

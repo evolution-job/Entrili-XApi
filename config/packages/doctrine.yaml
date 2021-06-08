@@ -1,0 +1,20 @@
+doctrine:
+    dbal:
+        charset: utf8
+        options:
+            # PDO::MYSQL_ATTR_INIT_COMMAND
+            1002: "SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))"
+        server_version: '%env(resolve:DATABASE_VERSION)%'
+        override_url: true
+        url: '%env(resolve:DATABASE_URL)%'
+    orm:
+        auto_generate_proxy_classes: true
+        entity_managers:
+            default:
+                mappings:
+                    EntriliXApiBundle:
+                        is_bundle: true
+                        type: annotation
+                        dir: "Repository/Mapping"
+                        prefix: 'Entrili\XApiBundle\Repository\Mapping'
+                        alias: Entrili
